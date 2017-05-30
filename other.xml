@@ -16,7 +16,7 @@
         <Publisher>Harper &amp; Row</Publisher>
         <Cost currency="USD">2.95</Cost>
     </Book>
-    <Book>
+<Book>
         <Title>Incredible book about Java</Title>
         <Author>Saburov Anton</Author>
         <Date>2015</Date>

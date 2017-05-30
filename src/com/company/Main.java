@@ -5,10 +5,7 @@ import java.io.IOException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.TransformerFactoryConfigurationError;
+import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
@@ -17,47 +14,6 @@ import org.xml.sax.SAXException;
 
 public class Main {
 
-//    public static void main(String[] args) {
-//        try {
-//            // Создается построитель документа
-//            DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-//            // Создается дерево DOM документа из файла
-//            Document document = documentBuilder.parse("BookCatalog.xml");
-//
-//            // Получаем корневой элемент
-//            Node root = document.getDocumentElement();
-//
-//            System.out.println("List of books:");
-//            System.out.println();
-//            // Просматриваем все подэлементы корневого - т.е. книги
-//            NodeList books = root.getChildNodes();
-//            for (int i = 0; i < books.getLength(); i++) {
-//                Node book = books.item(i);
-//                // Если нода не текст, то это книга - заходим внутрь
-//                if (book.getNodeType() != Node.TEXT_NODE) {
-//                    NodeList bookProps = book.getChildNodes();
-//                    for(int j = 0; j < bookProps.getLength(); j++) {
-//                        Node bookProp = bookProps.item(j);
-//                        // Если нода не текст, то это один из параметров книги - печатаем
-//                        if (bookProp.getNodeType() != Node.TEXT_NODE) {
-//                            System.out.println(bookProp.getNodeName() + ":" + bookProp.getChildNodes().item(0).getTextContent());
-//                        } else {
-//                            System.out.println(bookProp.getTextContent());
-//                        }
-//                    }
-//                    System.out.println("===========>>>>");
-//                }
-//            }
-//
-//        } catch (ParserConfigurationException ex) {
-//            ex.printStackTrace(System.out);
-//        } catch (SAXException ex) {
-//            ex.printStackTrace(System.out);
-//        } catch (IOException ex) {
-//            ex.printStackTrace(System.out);
-//        }
-//    }
-
     public static void main(String[] args) {
         try {
             // Создается построитель документа
@@ -65,8 +21,30 @@ public class Main {
             // Создается дерево DOM документа из файла
             Document document = documentBuilder.parse("BookCatalog.xml");
 
-            // Вызываем метод для добавления новой книги
-            addNewBook(document);
+            // Получаем корневой элемент
+            Node root = document.getDocumentElement();
+
+            System.out.println("List of books:");
+            System.out.println();
+            // Просматриваем все подэлементы корневого - т.е. книги
+            NodeList books = root.getChildNodes();
+            for (int i = 0; i < books.getLength(); i++) {
+                Node book = books.item(i);
+                // Если нода не текст, то это книга - заходим внутрь
+                if (book.getNodeType() != Node.TEXT_NODE) {
+                    NodeList bookProps = book.getChildNodes();
+                    for(int j = 0; j < bookProps.getLength(); j++) {
+                        Node bookProp = bookProps.item(j);
+                        // Если нода не текст, то это один из параметров книги - печатаем
+                        if (bookProp.getNodeType() != Node.TEXT_NODE) {
+                            System.out.println(bookProp.getNodeName() + ":" + bookProp.getChildNodes().item(0).getTextContent());
+                        } else {
+                            System.out.println(bookProp.getTextContent());
+                        }
+                    }
+                    System.out.println("===========>>>>");
+                }
+            }
 
         } catch (ParserConfigurationException ex) {
             ex.printStackTrace(System.out);
@@ -76,6 +54,25 @@ public class Main {
             ex.printStackTrace(System.out);
         }
     }
+
+//    public static void main(String[] args) {
+//        try {
+//            // Создается построитель документа
+//            DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+//            // Создается дерево DOM документа из файла
+//            Document document = documentBuilder.parse("BookCatalog.xml");
+//
+//            // Вызываем метод для добавления новой книги
+//            addNewBook(document);
+//
+//        } catch (ParserConfigurationException ex) {
+//            ex.printStackTrace(System.out);
+//        } catch (SAXException ex) {
+//            ex.printStackTrace(System.out);
+//        } catch (IOException ex) {
+//            ex.printStackTrace(System.out);
+//        }
+//    }
 
     // Функция добавления новой книги и записи результата в файл
     private static void addNewBook(Document document) throws TransformerFactoryConfigurationError, DOMException {
@@ -124,11 +121,13 @@ public class Main {
     // Функция для сохранения DOM в файл
     private static void writeDocument(Document document) throws TransformerFactoryConfigurationError {
         try {
-            Transformer tr = TransformerFactory.newInstance().newTransformer();
+            Transformer transformer = TransformerFactory.newInstance().newTransformer();
+//            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+//            transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
             DOMSource source = new DOMSource(document);
             FileOutputStream fos = new FileOutputStream("other.xml");
             StreamResult result = new StreamResult(fos);
-            tr.transform(source, result);
+            transformer.transform(source, result);
         } catch (TransformerException | IOException e) {
             e.printStackTrace(System.out);
         }
