@@ -39,10 +39,12 @@ public class Main {
                         if (bookProp.getNodeType() != Node.TEXT_NODE) {
                             System.out.println(bookProp.getNodeName() + ":" + bookProp.getChildNodes().item(0).getTextContent());
                         } else {
-                            System.out.println(bookProp.getTextContent());
+//                            System.out.println(bookProp.getTextContent());
                         }
                     }
                     System.out.println("===========>>>>");
+                } else {
+//                    System.out.println(book.getTextContent());
                 }
             }
 
