@@ -16,12 +16,12 @@
         <Publisher>Harper &amp; Row</Publisher>
         <Cost currency="USD">2.95</Cost>
     </Book>
-<Book>
-        <Title>Incredible book about Java</Title>
-        <Author>Saburov Anton</Author>
-        <Date>2015</Date>
-        <ISBN>0-06-999999-9</ISBN>
-        <Publisher>Java-Course publisher</Publisher>
-        <Cost currency="RUB">499</Cost>
+    <Book>
+        <Title>The Hitchhiker's Guide to the Galaxy</Title>
+        <Author>Douglas Adams</Author>
+        <Date>1992</Date>
+        <ISBN>978-0-3303-1611-8</ISBN>
+        <Publisher>Macmillan Publishers</Publisher>
+        <Cost currency="UAH">458</Cost>
     </Book>
 </BookCatalogue>

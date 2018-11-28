@@ -38,12 +38,12 @@ public class Main {
                         // Если нода не текст, то это один из параметров книги - печатаем
                         if (bookProp.getNodeType() != Node.TEXT_NODE) {
                             System.out.println(bookProp.getNodeName() + ":" + bookProp.getChildNodes().item(0).getTextContent());
-                        } else {
+//                        } else {
 //                            System.out.println(bookProp.getTextContent());
                         }
                     }
                     System.out.println("===========>>>>");
-                } else {
+//                } else {
 //                    System.out.println(book.getTextContent());
                 }
             }
@@ -87,24 +87,24 @@ public class Main {
         // <Title>
         Element title = document.createElement("Title");
         // Устанавливаем значение текста внутри тега
-        title.setTextContent("Incredible book about Java");
+        title.setTextContent("The Hitchhiker's Guide to the Galaxy");
         // <Author>
         Element author = document.createElement("Author");
-        author.setTextContent("Saburov Anton");
+        author.setTextContent("Douglas Adams");
         // <Date>
         Element date = document.createElement("Date");
-        date.setTextContent("2015");
+        date.setTextContent("1992");
         // <ISBN>
         Element isbn = document.createElement("ISBN");
-        isbn.setTextContent("0-06-999999-9");
+        isbn.setTextContent("978-0-3303-1611-8");
         // <Publisher>
         Element publisher = document.createElement("Publisher");
-        publisher.setTextContent("Java-Course publisher");
+        publisher.setTextContent("Macmillan Publishers");
         // <Cost>
         Element cost = document.createElement("Cost");
-        cost.setTextContent("499");
+        cost.setTextContent("458");
         // Устанавливаем атрибут
-        cost.setAttribute("currency", "RUB");
+        cost.setAttribute("currency", "UAH");
 
         // Добавляем внутренние элементы книги в элемент <Book>
         book.appendChild(title);
@@ -115,6 +115,7 @@ public class Main {
         book.appendChild(cost);
         // Добавляем книгу в корневой элемент
         root.appendChild(book);
+//        root.insertBefore(book, root.getLastChild());
 
         // Записываем XML в файл
         writeDocument(document);
